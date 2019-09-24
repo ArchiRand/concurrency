@@ -1,6 +1,9 @@
 package ru.javaops.masterjava.matrix;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 
@@ -21,7 +24,7 @@ public class MatrixUtil {
     // TODO optimize by https://habrahabr.ru/post/114797/
     public static int[][] singleThreadMultiply(int[][] matrixA, int[][] matrixB) {
         final int matrixSize = matrixA.length;
-        final int[][] matrixC = new int[matrixSize][matrixSize];
+        final double[][] matrixC = new double[matrixSize][matrixSize];
 
         for (int i = 0; i < matrixSize; i++) {
             for (int j = 0; j < matrixSize; j++) {
@@ -35,19 +38,18 @@ public class MatrixUtil {
         return matrixC;
     }
 
-    public static int[][] create(int size) {
-        int[][] matrix = new int[size][size];
+    public static double[][] create(int size) {
+        double[][] matrix = new double[size][size];
         Random rn = new Random();
-
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                matrix[i][j] = rn.nextInt(10);
+                matrix[i][j] = rn.nextDouble();
             }
         }
         return matrix;
     }
 
-    public static boolean compare(int[][] matrixA, int[][] matrixB) {
+    public static boolean compare(double[][] matrixA, double[][] matrixB) {
         final int matrixSize = matrixA.length;
         for (int i = 0; i < matrixSize; i++) {
             for (int j = 0; j < matrixSize; j++) {
