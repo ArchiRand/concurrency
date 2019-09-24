@@ -13,26 +13,54 @@ import java.util.concurrent.ExecutorService;
  */
 public class MatrixUtil {
 
-    // TODO implement parallel multiplication matrixA*matrixB
-    public static int[][] concurrentMultiply(int[][] matrixA, int[][] matrixB, ExecutorService executor) throws InterruptedException, ExecutionException {
-        final int matrixSize = matrixA.length;
-        final int[][] matrixC = new int[matrixSize][matrixSize];
-
-        return matrixC;
-    }
-
-    // TODO optimize by https://habrahabr.ru/post/114797/
-    public static int[][] singleThreadMultiply(int[][] matrixA, int[][] matrixB) {
+    public static double[][] concurrentMultiply(double[][] matrixA, double[][] matrixB, ExecutorService executor) throws InterruptedException, ExecutionException {
         final int matrixSize = matrixA.length;
         final double[][] matrixC = new double[matrixSize][matrixSize];
+        final double[][] matrixBB = new double[matrixSize][matrixSize];
 
         for (int i = 0; i < matrixSize; i++) {
             for (int j = 0; j < matrixSize; j++) {
-                int sum = 0;
-                for (int k = 0; k < matrixSize; k++) {
-                    sum += matrixA[i][k] * matrixB[k][j];
+                matrixBB[i][j] = matrixB[j][i];
+            }
+        }
+
+        List<Callable<Void>> tasks = new ArrayList<>();
+        for (int i = 0; i < matrixSize; i++) {
+            final int row = i;
+            tasks.add(() -> {
+                int columnC = 0;
+                for (int row2 = 0; row2 < matrixSize; row2++) {
+                    int result = 0;
+                    for (int column = 0; column < matrixSize; column++) {
+                        result += matrixA[row][column] * matrixBB[row2][column];
+                    }
+                    matrixC[row][columnC] = result;
+                    columnC++;
                 }
-                matrixC[i][j] = sum;
+                return null;
+            });
+        }
+        executor.invokeAll(tasks);
+        return matrixC;
+    }
+
+    public static double[][] singleThreadMultiply(double[][] matrixA, double[][] matrixB) {
+        final int matrixSize = matrixA.length;
+        final double[][] matrixC = new double[matrixSize][matrixSize];
+
+        for (int col = 0; col < matrixSize; col++) {
+            final double[] columnB = new double[matrixSize];
+            for (int k = 0; k < matrixSize; k++) {
+                columnB[k] = matrixB[k][col];
+            }
+
+            for (int row = 0; row < matrixSize; row++) {
+                int sum = 0;
+                final double[] rowA = matrixA[row];
+                for (int k = 0; k < matrixSize; k++) {
+                    sum += rowA[k] * columnB[k];
+                }
+                matrixC[row][col] = sum;
             }
         }
         return matrixC;
