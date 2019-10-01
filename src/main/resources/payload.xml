@@ -1,5 +1,5 @@
-<Payload xmlns="arhirand"
-         xsi:schemaLocation="arhirand payload.xsd"
+<Payload xmlns="archirand"
+         xsi:schemaLocation="archirand payload.xsd"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <Users>
         <User flag="active" city="kiv">
