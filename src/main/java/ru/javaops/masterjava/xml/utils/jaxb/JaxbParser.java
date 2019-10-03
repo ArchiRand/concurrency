@@ -1,4 +1,4 @@
-package ru.javaops.masterjava.xml.utils;
+package ru.javaops.masterjava.xml.utils.jaxb;
 
 import org.xml.sax.SAXException;
 

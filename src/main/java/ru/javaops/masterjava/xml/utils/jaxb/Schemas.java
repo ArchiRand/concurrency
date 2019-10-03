@@ -1,4 +1,4 @@
-package ru.javaops.masterjava.xml.utils;
+package ru.javaops.masterjava.xml.utils.jaxb;
 
 import com.google.common.io.Resources;
 import org.xml.sax.SAXException;
