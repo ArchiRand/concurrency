@@ -2,22 +2,43 @@
          xsi:schemaLocation="archirand payload.xsd"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <Users>
-        <User flag="active" city="kiv">
-            <email>gmail@gmail.com</email>
-            <fullName>Full Name</fullName>
+        <User flag="active"
+              city="kiv"
+              email="gmail@gmail.com"
+              group="A1 B2 B3">
+            Full Name
         </User>
-        <User flag="superuser" city="spb">
-            <email>admin@javaops.ru</email>
-            <fullName>Admin</fullName>
+        <User flag="superuser"
+              city="spb"
+              email="admin@javaops.ru"
+              group="A1 B3 A2">
+            Admin
         </User>
-        <User flag="deleted" city="spb">
-            <email>mail@yandex.ru</email>
-            <fullName>Deleted</fullName>
+        <User flag="deleted"
+              city="spb"
+              email="mail@yandex.ru"
+              group="B1 B2 B3">
+            Deleted
         </User>
     </Users>
     <Cities>
         <City id="spb">Санкт-Петербург</City>
         <City id="kiv">Киев</City>
+        <City id="mow">Москва</City>
         <City id="mnsk">Минск</City>
     </Cities>
+    <Projects>
+        <Project name="topjava">
+            <description>topjava description</description>
+            <Group name="A1" type="REGISTERING"/>
+            <Group name="A2" type="CURRENT"/>
+            <Group name="A3" type="FINISHED"/>
+        </Project>
+        <Project name="masterjava">
+            <description>masterjava description</description>
+            <Group name="B1" type="REGISTERING"/>
+            <Group name="B2" type="CURRENT"/>
+            <Group name="B3" type="FINISHED"/>
+        </Project>
+    </Projects>
 </Payload>
